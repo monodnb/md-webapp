@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name materialWebapp
+ * @name mdWebapp
  * @description
- * # materialWebapp
+ * # mdWebapp
  *
  * Main module of the application.
  */
 angular
-  .module('materialWebapp', [
+  .module('mdWebapp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -22,7 +22,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/app/views/main.html',
+        templateUrl: './views/main.html',
         controller: 'MainCtrl'
       })
       .otherwise({

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the materialDesign
  */
-angular.module('materialWebapp')
+angular.module('mdWebapp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

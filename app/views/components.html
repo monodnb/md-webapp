@@ -1,0 +1,99 @@
+<h1 class="display4">This is the Components view</h1>
+<div class="c-max">
+    <div class="carousel _2-1 lazy">
+        <div class="carousel-slideshow">
+            <div class="slide" data-contrast="light"><img src="img/slider/jan.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/feb.jpg">
+            </div>
+            <div class="slide" data-contrast="dark"><img src="img/slider/mar.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/apr.jpg">
+            </div>
+            <div class="slide" data-contrast="dark"><img src="img/slider/may.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/jun.jpg">
+            </div>
+            <div class="slide" data-contrast="dark"><img src="img/slider/jul.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/aug.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/sep.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/oct.jpg">
+            </div>
+            <div class="slide" data-contrast="dark"><img src="img/slider/nov.jpg">
+            </div>
+            <div class="slide" data-contrast="light"><img src="img/slider/dec.jpg">
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button type="button" class="prev" aria-controls="carousel-controls" aria-label="Previous Slide" aria-disabled="false">
+                <span class="off-screen" aria-hidden="true">Previous Slide</span>
+                <svg focusable="false" class="svg-icon slide-back" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd">
+                        <path d="M0 0h24v24H0z"></path>
+                        <path class="fill-color" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2z" fill="#ffffff" opacity="1"></path>
+                    </g>
+                </svg>
+            </button>
+            <div class="pager">
+                <button class="pager-dot" data-index="0" aria-controls="carousel-controls" aria-label="Change to slide 1" aria-selected="true">
+                    <div class="pager-dot-inner" data-index="0"></div>
+                </button>
+                <button class="pager-dot" data-index="1" aria-controls="carousel-controls" aria-label="Change to slide 2" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="1"></div>
+                </button>
+                <button class="pager-dot" data-index="2" aria-controls="carousel-controls" aria-label="Change to slide 3" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="2"></div>
+                </button>
+                <button class="pager-dot" data-index="3" aria-controls="carousel-controls" aria-label="Change to slide 4" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="3"></div>
+                </button>
+                <button class="pager-dot" data-index="4" aria-controls="carousel-controls" aria-label="Change to slide 5" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="4"></div>
+                </button>
+                <button class="pager-dot" data-index="5" aria-controls="carousel-controls" aria-label="Change to slide 6" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="5"></div>
+                </button>
+                <button class="pager-dot" data-index="6" aria-controls="carousel-controls" aria-label="Change to slide 7" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="6"></div>
+                </button>
+                <button class="pager-dot" data-index="7" aria-controls="carousel-controls" aria-label="Change to slide 8" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="7"></div>
+                </button>
+                <button class="pager-dot" data-index="8" aria-controls="carousel-controls" aria-label="Change to slide 9" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="8"></div>
+                </button>
+                <button class="pager-dot" data-index="9" aria-controls="carousel-controls" aria-label="Change to slide 10" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="9"></div>
+                </button>
+                <button class="pager-dot" data-index="10" aria-controls="carousel-controls" aria-label="Change to slide 11" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="10"></div>
+                </button>
+                <button class="pager-dot" data-index="11" aria-controls="carousel-controls" aria-label="Change to slide 12" aria-selected="false">
+                    <div class="pager-dot-inner" data-index="11"></div>
+                </button>
+
+            </div>
+            <button type="button" class="next" aria-controls="carousel-controls" aria-label="Next Slide" aria-disabled="true">
+                <span class="off-screen" aria-hidden="true">Next Slide</span>
+                <svg focusable="false" class="svg-icon slide-forward" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd">
+                        <path d="M0 0h24v24H0z"></path>
+                        <path class="fill-color" d="M12 4l-1.4 1.4 5.6 5.6H4v2h12.2l-5.6 5.6L12 20l8-8-8-8z" fill="#ffffff" opacity="1"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(".carousel").carousel({
+        lazy: true,
+        visibleSlides: 1,
+        initialSlide: 6
+    });
+</script>

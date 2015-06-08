@@ -39,7 +39,7 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     });
 
     var injectScripts = gulp.src([
-      options.app + '/scripts/**/*.js',
+      options.app + '/scripts/**/*.js'
     ])
         .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
@@ -120,13 +120,22 @@ gulp.task('html', ['inject', 'partials'], function () {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(options.app + '/scripts/**/*.js')
+
+    return gulp.src([
+       //options.app + '/scripts/**/*.js',
+        options.app + '/js/**/*.js'])
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe(browserSync.reload({
             stream: true 
         }))
-        .pipe($.size());
+        .pipe($.size())
+        .pipe($.concat('all.js'))
+        .pipe($.uglify())
+        .pipe($.rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(options.tmp + '/serve/js/'));
 });
 
 gulp.task('styles', function () {
@@ -206,7 +215,7 @@ function browserSyncInit(baseDir, browser) {
         baseDir: baseDir,
         routes: routes
     };
-    
+
     browserSync.instance = browserSync.init({
         startPath: '/',
         server: server,
