@@ -31,26 +31,46 @@ var options = {
 var wiredep = require('wiredep').stream;
 
 
-gulp.task('inject', ['scripts', 'styles'], function () {
+gulp.task('inject', ['scripts', 'jq', 'styles'], function () {
     var injectStyles = gulp.src([
-      options.tmp + '/serve/styles/style.css',
+      options.tmp + '/serve/styles/style.css'
     ], {
         read: false
     });
 
-    var injectScripts = gulp.src([
-      options.app + '/scripts/**/*.js'
-    ])
-        .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
+
+    var injectJqScripts = gulp.src([
+      options.tmp + '/serve/jq/**/*.js'
+    ], {
+        read: false
+    });
+
+    var injectNgScripts = gulp.src([
+      options.tmp + '/serve/scripts/**/*.js'
+    ], {
+        read: false
+    });
 
     var injectOptions = {
         ignorePath: [options.app, options.tmp + '/serve'],
         addRootSlash: false
     };
 
+    var injectNgOptions = {
+        ignorePath: [options.app, options.tmp + '/serve'],
+        addRootSlash: false,
+        name: 'injectNg'
+    };
+    var injectJqOptions = {
+        ignorePath: [options.app, options.tmp + '/serve'],
+        addRootSlash: false,
+        name: 'injectJq'
+    };
+
     return gulp.src(options.app + '/*.html')
         .pipe($.inject(injectStyles, injectOptions))
-        .pipe($.inject(injectScripts, injectOptions))
+        .pipe($.inject(injectJqScripts, injectJqOptions))
+        .pipe($.inject(injectNgScripts, injectNgOptions))
         .pipe(wiredep(options.wiredep))
         .pipe(gulp.dest(options.tmp + '/serve'));
 });
@@ -119,10 +139,9 @@ gulp.task('html', ['inject', 'partials'], function () {
         }));
 });
 
-gulp.task('scripts', function () {
+gulp.task('jq', function () {
 
     return gulp.src([
-       //options.app + '/scripts/**/*.js',
         options.app + '/js/**/*.js'])
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
@@ -130,12 +149,31 @@ gulp.task('scripts', function () {
             stream: true 
         }))
         .pipe($.size())
-        .pipe($.concat('all.js'))
+        .pipe($.concat('jq-scripts.js'))
         .pipe($.uglify())
         .pipe($.rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest(options.tmp + '/serve/js/'));
+        .pipe(gulp.dest(options.tmp + '/serve/jq/'));
+});
+
+
+gulp.task('scripts', function () {
+
+    return gulp.src([
+        options.app + '/scripts/**/*.js'])
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+        .pipe($.size())
+        .pipe($.concat('ng-scripts.js'))
+        .pipe($.uglify())
+        .pipe($.rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(options.tmp + '/serve/scripts/'));
 });
 
 gulp.task('styles', function () {
@@ -187,10 +225,18 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(options.dist + '/fonts/'));
 });
 
-gulp.task('other', function () {
+gulp.task('fontconvert', function () {
+    return gulp.src([
+      options.app + '/fonts/**/*.ttf'
+    ])
+        .pipe($.ttf2woff())
+        .pipe(gulp.dest(options.dist + '/fonts/'));
+});
+
+gulp.task('other', ['fontconvert'], function () {
     return gulp.src([
       options.app + '/**/*',
-      '!' + options.app + '/**/*.{html,css,js,scss}'
+      '!' + options.app + '/**/*.{html,css,js,scss,ttf}'
     ])
         .pipe(gulp.dest(options.dist + '/'));
 });

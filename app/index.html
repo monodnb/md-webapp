@@ -91,8 +91,13 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
+    <!-- build:js({.tmp/serve/scripts}) scripts/ng-scripts.min.js -->
+    <!-- injectNg:js -->
+    <!-- jscript files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- build:js({.tmp/serve/jq}) jq/jq-scripts.min.js -->
+    <!-- injectJq:js -->
     <!-- js files will be automatically insert here -->
     <!-- endinject -->
 
@@ -101,10 +106,7 @@
     <!-- endinject -->
     <!-- endbuild -->
     
-    <script src="js/tabs.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/main.js"></script>
+
 
   </body>
 </html>
