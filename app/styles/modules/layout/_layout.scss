@@ -92,7 +92,7 @@ video {
 .lazy-loaded{
 	filter: saturate(1);
 	opacity: 1;
-	transition: opacity .4s cubic-bezier(0.4, 0, 0.2, 1), -webkit-filter .8s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: opacity .8s cubic-bezier(0.4, 0, 0.2, 1), filter .12s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* LAYOUT

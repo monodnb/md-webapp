@@ -1,5 +1,6 @@
+/*jslint browser: true, devel: true */
 // Tabs
-;(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
 
     'use strict';
 
@@ -59,13 +60,12 @@
             $thisTab = $element.find('.tab.active');
             //self.indicate($element, $indicator, $activeTab, $thisTab);
         });
-        
+
     };
 
 
     Tabs.prototype.indicate = function ($element, $indicator, $activeTab, $thisTab) {
-        var activeTabWidth = $activeTab.outerWidth(),
-            thisTabWidth = $thisTab.outerWidth(),
+        var thisTabWidth = $thisTab.outerWidth(),
             activeTabOffset = $activeTab.position().left,
             thisTabOffset = $thisTab.position().left,
             leftPos = thisTabOffset,
@@ -85,8 +85,8 @@
         $thisTab.addClass('active');
         self.setSubtitle($element, $thisTab);
     };
-    
-    Tabs.prototype.setSubtitle = function($element, $thisTab){
+
+    Tabs.prototype.setSubtitle = function ($element, $thisTab) {
         if (self.isAppbar($element)) {
             var viewText = $thisTab.text();
             $element.closest('#app-bar-wrapper').find('.app-view-title').text(viewText);

@@ -1,20 +1,19 @@
+/*jslint browser: true, devel: true */
 // Carousel
-;(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
 
     'use strict';
 
     //plugin name
-    var carousel = 'carousel';
-
-    //get instance
-    var self = null;
-
-    //defaults
-    var defaults = {
-        lazy: true,
-        visibleSlides: 1,
-        initialSlide: 1
-    };
+    var carousel = 'carousel',
+        //get instance
+        self = null,
+        //defaults
+        defaults = {
+            lazy: true,
+            visibleSlides: 1,
+            initialSlide: 1
+        };
 
     //main function
     function Carousel(element, options) {
@@ -74,7 +73,8 @@
             dotsLength = $pager.find('.pager-dot').length,
             currentDotIndex = parseInt($pagerCurrentDot.attr('data-index')),
             nextDotIndex,
-            visibleSlidesNo = this.options.visibleSlides * 100;
+            visibleSlidesNo = this.options.visibleSlides * 100,
+            dataContrast = $inViewSlide.attr('data-contrast');
 
         $pagerCurrentDot.removeClass('is-current');
 
@@ -104,13 +104,12 @@
         $inViewSlide = $slides.eq(inViewSlideIndex);
         $inViewSlide.addClass('in-view');
 
-        var dataContrast = $inViewSlide.attr('data-contrast');
-        if(dataContrast === 'light'){
+        if (dataContrast === 'light') {
             $element.find('.carousel-controls').addClass('light').removeClass('dark');
-        }else if(dataContrast === 'dark'){
+        } else if (dataContrast === 'dark') {
             $element.find('.carousel-controls').addClass('dark').removeClass('light');
         }
-        
+
 
         self.update($element, $slideShow, $inViewSlide);
         /*self.showImage($inViewSlide);
@@ -172,9 +171,8 @@
     Carousel.prototype.init = function () {
         var $element = this.element,
             $slideShow = $element.find('.carousel-slideshow'),
-            $slides = $slideShow.find('.slide');
-
-        var offsetPerc = parseInt(100 / this.options.visibleSlides),
+            $slides = $slideShow.find('.slide'),
+            offsetPerc = parseInt(100 / this.options.visibleSlides),
             initialSlideIndex = this.options.initialSlide;
 
         $element.removeClass('lazy');

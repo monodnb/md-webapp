@@ -1,12 +1,11 @@
-;
+/*jslint browser: true, devel: true */
 (function ($, window, document) {
 
     // The $ is now locally scoped 
     $(function () {
-
         // DOM ready!
         //Variables
-        $document = $(document),
+        var $document = $(document),
             $window = $(window),
             $body = $('body'),
             $appBarWrapper = $('div#app-bar-wrapper'),
@@ -23,16 +22,16 @@
         $appNav.addClass('left-side-nav');
         $newAppNav.addClass('app-bar-nav');
         $newAppNav.appendTo($appNav.parent());
-        $appNav.remove();
+        //$appNav.remove();
         $('ul.nav-list').tabs();
 
 
         // Event delegation
-        $(document).on('click', '.nav-list li', function () {          
+        $(document).on('click', '.nav-list li', function () {
             var $element = $(this);
             getView($element);
         });
-        
+
         $window.on('scroll', updateNav);
 
 
@@ -40,16 +39,19 @@
 
 
     // Functions
-    function updateNav(){
-        'use strict';   
-        var appBarWrapperOffset = $appBarWrapper.outerHeight() - $appBarMain.outerHeight(),
-            perc = ($window.scrollTop() / appBarWrapperOffset*3) -1;
-        if($window.scrollTop() > appBarWrapperOffset){
+    function updateNav() {
+        var $appBarWrapper = $('div#app-bar-wrapper'),
+            $appBarMain = $appBarWrapper.find('#app-bar-main'),
+            $appBarExt = $appBarWrapper.find('#app-bar-extension'),
+            $appViewTitle = $appBarExt.find('.app-view-title'),
+            appBarWrapperOffset = $appBarWrapper.outerHeight() - $appBarMain.outerHeight(),
+            perc = ($(window).scrollTop() / appBarWrapperOffset * 3) - 1;
+        if ($(window).scrollTop() > appBarWrapperOffset) {
             $appBarMain.addClass('raised');
-        }else{
+        } else {
             $appBarMain.removeClass('raised');
-            if (perc >= -1){
-                while(perc>0){
+            if (perc >= -1) {
+                while (perc > 0) {
                     perc = 0;
                 }
                 perc = Math.abs(perc);
@@ -57,10 +59,11 @@
 
             }
         }
-    };
+    }
 
 
-    function getView($element) { 
+    function getView($element) {
+        'use strict';
         var linkURL = $element.attr('data-rel');
         $.ajax({
             // the URL for the request
@@ -85,16 +88,16 @@
         });
     }
 
-    function startFn() { 
+    function startFn() {
         //console.log('fetching view');
     }
 
-    function successFn(result) { 
+    function successFn(result) {
         $('#view').empty();
         $('#view').append($(result)).hide(0).delay(1).show(0);
     }
 
-    function errorFn(xhr, status, strErr) { 
+    function errorFn(xhr, status, strErr) {
         console.log('There was an error!');
     }
 
