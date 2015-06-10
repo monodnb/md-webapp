@@ -11,7 +11,7 @@ module.exports = function (options) {
     gulp.task('scripts', function () {
 
         return gulp.src([
-        options.app + '/scripts/**/*.js'])
+        options.app + '/**/*.js'])
             .pipe($.jshint())
             .pipe($.jshint.reporter('jshint-stylish'))
             .pipe(browserSync.reload({

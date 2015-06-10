@@ -15,9 +15,17 @@ module.exports = function (options) {
             read: false
         });
 
-        var injectScripts = gulp.src([
-          options.app + '/scripts/modules/*.js',
-            options.app + '/scripts/main.js'
+        var injectJs = gulp.src([
+          options.app + '/js/components/*.js',
+            options.app + '/js/main.js'
+        ], {
+            read: false,
+            name: 'javascript'
+        });
+
+        var injectNg = gulp.src([
+          options.app + '/scripts/components/*.js',
+            options.app + '/scripts/*.js'
         ], {
             read: false
         });
@@ -27,9 +35,22 @@ module.exports = function (options) {
             addRootSlash: false
         };
 
+        var injectNgOptions = {
+            ignorePath: [options.app, options.tmp + '/serve'],
+            addRootSlash: false,
+            name: 'angular'
+        };
+
+        var injectJsOptions = {
+            ignorePath: [options.app, options.tmp + '/serve'],
+            addRootSlash: false,
+            name: 'javascript'
+        };
+
         return gulp.src(options.app + '/*.html')
             .pipe($.inject(injectStyles, injectOptions))
-            .pipe($.inject(injectScripts, injectOptions))
+            .pipe($.inject(injectJs, injectJsOptions))
+            .pipe($.inject(injectNg, injectNgOptions))
             .pipe(wiredep(options.wiredep))
             .pipe(gulp.dest(options.tmp + '/serve'));
     });

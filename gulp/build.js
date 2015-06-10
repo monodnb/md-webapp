@@ -66,8 +66,8 @@ module.exports = function (options) {
             options.app + '/**/*',
             '!' + options.app + '/**/*.{css,js,scss,ttf}',
             '!' + options.app + '/index.html',
-            '!' + options.app + '/**/modules',
-            '!' + options.app + '/**/modules/**/*'
+            '!' + options.app + '/**/components',
+            '!' + options.app + '/**/components/**/*'
     ])
             .pipe(gulp.dest(options.dist + '/'));
     });
