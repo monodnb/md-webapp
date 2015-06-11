@@ -65,8 +65,9 @@
         }
     };
 
-    Carousel.prototype.toggle = function ($this, $element, $slideShow, $inViewSlide) {
-        var inViewSlideIndex = $inViewSlide.index(),
+    Carousel.prototype.toggle = function ($this, $element, $slideShow) {
+        var $inViewSlide = $slideShow.find('.slide.in-view'),
+            inViewSlideIndex = $inViewSlide.index(),
             $slides = $slideShow.find('.slide'),
             $pager = $element.find('.pager'),
             $pagerCurrentDot = $pager.find('.pager-dot.is-current'),
@@ -74,7 +75,7 @@
             currentDotIndex = parseInt($pagerCurrentDot.attr('data-index')),
             nextDotIndex,
             visibleSlidesNo = this.options.visibleSlides * 100,
-            dataContrast = $inViewSlide.attr('data-contrast');
+            dataContrast;
 
         $pagerCurrentDot.removeClass('is-current');
 
@@ -103,12 +104,13 @@
         $slides.removeClass('in-view');
         $inViewSlide = $slides.eq(inViewSlideIndex);
         $inViewSlide.addClass('in-view');
+        dataContrast = $inViewSlide.attr('data-contrast');
 
         if (dataContrast === 'light') {
             $element.find('.carousel-controls').addClass('light').removeClass('dark');
         } else if (dataContrast === 'dark') {
             $element.find('.carousel-controls').addClass('dark').removeClass('light');
-        }
+        };
 
 
         self.update($element, $slideShow, $inViewSlide);
@@ -156,7 +158,7 @@
         function toggleSlide() {
             var $this = $(this);
             if (!$this.hasClass('disabled')) {
-                self.toggle($this, $element, $slideShow, $inViewSlide);
+                self.toggle($this, $element, $slideShow);
             }
         }
 
